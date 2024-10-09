@@ -53,7 +53,7 @@ def test_erc721_functionality(ev_battery_passport, government_account, manufactu
 
     # Manufacturer sets battery data and mints token
     token_id = 1
-    off_chain_data_hash = "QmPoEfuyhqEY7YZAmMmEoGc5Kco59EQ8kBQHfv6Q5a4CwQ"  # Example IPFS hash
+    off_chain_data_hash = "QmYwif6LTpPAmd8XX3WmPauVQBTgHvfeB4CgtKS9VgxWRx"  # Example IPFS hash
     print(f"Setting battery data for token {token_id}...")
     tx = ev_battery_passport.setBatteryData(
         token_id,
@@ -186,7 +186,7 @@ def test_erc721_functionality(ev_battery_passport, government_account, manufactu
     
     # Create a second token with different data
     token_id_2 = 2
-    off_chain_data_hash_2 = "QmPoEfuyhqEY7YZAmMmEoGc5Kco59EQ8kBQHfv6Q5a4CwQ"  # Example IPFS hash for second token
+    off_chain_data_hash_2 = "QmYwif6LTpPAmd8XX3WmPauVQBTgHvfeB4CgtKS9VgxWRx"  # Example IPFS hash for second token
     print(f"Setting battery data for second token {token_id_2}...")
     tx_2 = ev_battery_passport.setBatteryData(
         token_id_2,
@@ -345,9 +345,9 @@ def test_erc721_batch_functionality(ev_battery_passport, government_account, man
     battery_types = ["Lithium-ion", "Lithium-ion", "Lithium-ion"]
     product_names = ["Tesla Battery Pack", "LG Chem Electric Vehicle Battery", "Panasonic Electric Vehicle Battery"]
     off_chain_data_hashes = [
-    "QmPoEfuyhqEY7YZAmMmEoGc5Kco59EQ8kBQHfv6Q5a4CwQ",  # IPFS hash for Tesla
-    "QmPoEfuyhqEY7YZAmMmEoGc5Kco59EQ8kBQHfv6Q5a4CwQ",  # IPFS hash for LG Chem
-    "QmPoEfuyhqEY7YZAmMmEoGc5Kco59EQ8kBQHfv6Q5a4CwQ"   # IPFS hash for Panasonic
+    "QQmYwif6LTpPAmd8XX3WmPauVQBTgHvfeB4CgtKS9VgxWRx",  # IPFS hash for Tesla
+    "QmYwif6LTpPAmd8XX3WmPauVQBTgHvfeB4CgtKS9VgxWRx",  # IPFS hash for LG Chem
+    "QmYwif6LTpPAmd8XX3WmPauVQBTgHvfeB4CgtKS9VgxWRx"   # IPFS hash for Panasonic
 ]
 
     # Mint batteries in batch

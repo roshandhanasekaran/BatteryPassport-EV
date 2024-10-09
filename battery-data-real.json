@@ -1,26 +1,72 @@
 {
-    "durability": "8 years",
-    "performance": "Excellent",
-    "recycledContent": "10%",
-    "endOfLifeCollectionInfo": "Collected by Authorized Recycler",
-    "batteryHealth": "92%",
-    "ghgEmissions": "Low",
-    "declarationOfConformity": "UL 2580, ISO 9001",
-    "hazardousSubstances": "Contains lithium and cobalt",
-    "certifications": "ISO 14001, RoHS Compliant",
-    "dueDiligencePolicy": "Conflict-free minerals policy",
-    "chainOfCustody": [
-      "Manufacturer: LG Chem",
-      "Distributor: EV Batteries Inc.",
-      "Authorized Dealer: AutoNation"
-    ],
-    "warranty": "5 years",
-    "chargingCycles": "1000 cycles",
-    "weight": "320 kg",
-    "dimensions": {
-      "length": "800 mm",
-      "width": "500 mm",
-      "height": "300 mm"
+  "manufacturers": [
+    {
+      "name": "LG Chem",
+      "batteryDetails": {
+        "durability": "8 years",
+        "performance": "Excellent",
+        "recycledContent": "10%",
+        "batteryHealth": "92%",
+        "ghgEmissions": "Low",
+        "warranty": "5 years",
+        "chargingCycles": "1000 cycles",
+        "weight": "320 kg",
+        "dimensions": {
+          "length": "800 mm",
+          "width": "500 mm",
+          "height": "300 mm"
+        }
+      },
+      "compliance": {
+        "declarationOfConformity": [
+          "UL 2580",
+          "ISO 9001"
+        ],
+        "hazardousSubstances": [
+          "Contains lithium",
+          "Contains cobalt"
+        ],
+        "certifications": [
+          "ISO 14001",
+          "RoHS Compliant"
+        ],
+        "dueDiligencePolicy": "Conflict-free minerals policy"
+      },
+      "links": {
+        "productSpecification": [
+          "https://www.lgchem.com/product/PD00000066"
+        ],
+        "safetyDataSheet": [
+          "https://www.lgchem.com/upload/file/product/LGChem_Catalog_Global_2018.pdf"
+        ],
+        "certificationDocument": [
+          "https://blog.lgchem.com/en/2023/06/23_battery_materials_cnt/"
+        ],
+        "recyclingInstructions": [
+          "https://www.lg.com/us/solar/solar/files/resources/LG_ESS_brochure-Final_Ver1_04052019.pdf"
+        ],
+        "warranty": [
+          "https://www.lgessbattery.com/us/main/main.lg"
+        ]
+      }
     }
-  }
-  
+  ],
+  "suppliers": [
+    {
+      "name": "EV Batteries Inc.",
+      "chainOfCustody": {
+        "role": "Distributor",
+        "batteryDetails": {
+          "performance": "Excellent",
+          "ghgEmissions": "Low"
+        }
+      }
+    }
+  ],
+  "recyclers": [
+    {
+      "name": "Authorized Recycler",
+      "endOfLifeCollectionInfo": "Collected by Authorized Recycler"
+    }
+  ]
+}

@@ -81,3 +81,62 @@ def test_retrieve_off_chain_data(ev_battery_passport, government_account, manufa
         print("Failed to retrieve off-chain data.")
         
         
+def test_update_off_chain_data(ev_battery_passport, government_account, manufacturer_account, supplier_account, recycler_account, consumer_account):
+    """Test updating the off-chain data hash for an existing battery token."""
+
+    # Add a manufacturer and set up the initial state
+    print("Adding manufacturer and locking deposit...")
+    ev_battery_passport.addManufacturer(manufacturer_account, {'from': government_account})
+
+    # Get the minimum deposit required in Wei
+    min_deposit_in_wei = ev_battery_passport.calculateMinDeposit({'from': government_account})
+
+    # Manufacturer deposits the minimum required amount
+    ev_battery_passport.deposit({'from': manufacturer_account, 'value': min_deposit_in_wei})
+    ev_battery_passport.lockDeposit({'from': manufacturer_account})
+
+    # Mint a battery token
+    token_id = 1
+    battery_model = "Tesla 4680"
+    manufacturer_location = "Austin, Texas, USA"
+    battery_type = "Lithium-ion"
+    product_name = "Tesla Battery Pack"
+    initial_off_chain_data_hash = "QmPoEfuyhqEY7YZAmMmEoGc5Kco59EQ8kBQHfv6Q5a4CwQ"  # Initial IPFS hash
+
+    print("Minting battery token...")
+    ev_battery_passport.mintBatteryBatch(
+        [token_id],
+        [battery_model],
+        [manufacturer_location],
+        [battery_type],
+        [product_name],
+        [initial_off_chain_data_hash],
+        {'from': manufacturer_account}
+    )
+
+    # Verify the token exists and the off-chain data hash is set
+    assert ev_battery_passport.ownerOf(token_id) == manufacturer_account
+    battery_details = ev_battery_passport.viewBatteryDetails(token_id, {'from': manufacturer_account})
+    assert battery_details[7] == initial_off_chain_data_hash
+    print(f"Initial off-chain data hash: {initial_off_chain_data_hash} set successfully.")
+
+    # Update the off-chain data hash
+    new_off_chain_data_hash = "QmNewHash12345abcdef67890PoEfuyhqEY7YZAmMmEoGc5Kco59EQ8k"  # New IPFS hash
+
+    print("Updating the off-chain data hash...")
+    tx = ev_battery_passport.updateOffChainData(token_id, new_off_chain_data_hash, {'from': manufacturer_account})
+
+    # Verify OffChainDataUpdated event was emitted with the new hash
+    assert 'OffChainDataUpdated' in tx.events
+    event = tx.events['OffChainDataUpdated'][0]  # First event log
+
+    # Check that the tokenId and new hash are correct
+    assert event['tokenId'] == token_id
+    assert event['newOffChainDataHash'] == new_off_chain_data_hash  # Verify new hash
+
+    # Verify the new off-chain data hash is updated in the contract
+    battery_details_after_update = ev_battery_passport.viewBatteryDetails(token_id, {'from': manufacturer_account})
+    assert battery_details_after_update[7] == new_off_chain_data_hash
+    print(f"Off-chain data hash updated successfully to: {new_off_chain_data_hash}")
+
+
