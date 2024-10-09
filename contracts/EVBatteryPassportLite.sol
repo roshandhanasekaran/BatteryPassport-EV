@@ -78,6 +78,8 @@ contract EVBatteryPassportLite is ERC721, AccessControl, ReentrancyGuard {
     event BatteryReturnedToManufacturer(uint256 indexed tokenId, address indexed recycler, address indexed manufacturer);
     event ConsentGranted(uint256 indexed tokenId, address indexed role);
     event ConsentRevoked(uint256 indexed tokenId, address indexed role);
+    event OffChainDataUpdated(uint256 indexed tokenId, string newOffChainDataHash, uint256 timestamp);
+
 
     // Custom errors for gas efficiency
     error OnlyGovernment();
@@ -121,6 +123,17 @@ contract EVBatteryPassportLite is ERC721, AccessControl, ReentrancyGuard {
         require(hasRole(CONSUMER_ROLE, msg.sender), "Caller is not a consumer");
         _;
     }
+
+    modifier onlyAuthorizedUpdater() {
+    require(
+        hasRole(GOVERNMENT_ROLE, msg.sender) ||
+        hasRole(MANUFACTURER_ROLE, msg.sender) ||
+        hasRole(SUPPLIER_ROLE, msg.sender) ||
+        hasRole(RECYCLER_ROLE, msg.sender),
+        "Caller does not have permission to update off-chain data"
+    );
+    _;
+}
 
 
 
@@ -349,6 +362,25 @@ contract EVBatteryPassportLite is ERC721, AccessControl, ReentrancyGuard {
         data.returnedToManufacturer,                   // returnedToManufacturer
         data.offChainDataHash                          // offChainDataHash
     );
+}
+
+function updateOffChainData(
+    uint256 tokenId,
+    string memory newOffChainDataHash
+        ) external onlyAuthorizedUpdater {
+        require(_exists(tokenId), "ERC721: token does not exist");
+        require(bytes(newOffChainDataHash).length > 0, "Invalid data hash");
+        // Retrieve current off-chain data hash for comparison
+        string memory currentOffChainDataHash = batteryData[tokenId].offChainDataHash;
+        // Ensure the new hash is different from the current one
+        require(keccak256(abi.encodePacked(currentOffChainDataHash)) != keccak256(abi.encodePacked(newOffChainDataHash)), 
+            "New off-chain data hash must be different from the current hash");
+        // Emit an event before updating to log the previous hash
+        emit OffChainDataUpdated(tokenId, currentOffChainDataHash, block.timestamp);
+        // Update the off-chain data hash
+        batteryData[tokenId].offChainDataHash = newOffChainDataHash;
+        // Emit an event to notify that off-chain data has been updated
+        emit OffChainDataUpdated(tokenId, newOffChainDataHash, block.timestamp);
 }
 
     // Override Functions

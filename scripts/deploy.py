@@ -1,6 +1,6 @@
 # scripts/deploy.py
 from brownie import MockV3Aggregator
-from brownie import EVBatteryPassportLite, MockV3Aggregator, network, config
+from brownie import EVBatteryPassportLite,EVBatteryPassportBatch, MockV3Aggregator, network, config
 from scripts.helpful_scripts import (
     get_account,
     deploy_mocks,

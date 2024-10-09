@@ -1,5 +1,5 @@
 import pytest
-from brownie import accounts, Wei
+from brownie import accounts, Wei, reverts
 import requests
 
 @pytest.fixture
@@ -79,3 +79,5 @@ def test_retrieve_off_chain_data(ev_battery_passport, government_account, manufa
         print(off_chain_data)
     else:
         print("Failed to retrieve off-chain data.")
+        
+        

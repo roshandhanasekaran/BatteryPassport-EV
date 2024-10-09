@@ -470,5 +470,8 @@ def test_erc721_batch_functionality(ev_battery_passport, government_account, man
         print(f"Battery {token_id} has been marked as recycled successfully.")
 
     print("All batch operations executed successfully!")
+    
+    
+
 
 
