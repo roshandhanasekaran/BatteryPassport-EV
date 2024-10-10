@@ -52,7 +52,7 @@ def test_erc721_functionality(ev_battery_passport, government_account, manufactu
     print(f"Manufacturer {manufacturer_account} added and deposit locked.")
 
     # Manufacturer sets battery data and mints token
-    token_id = 1
+    token_id = 1           
     off_chain_data_hash = "QmYwif6LTpPAmd8XX3WmPauVQBTgHvfeB4CgtKS9VgxWRx"  # Example IPFS hash
     print(f"Setting battery data for token {token_id}...")
     tx = ev_battery_passport.setBatteryData(

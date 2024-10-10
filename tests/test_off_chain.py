@@ -44,7 +44,7 @@ def test_retrieve_off_chain_data(ev_battery_passport, government_account, manufa
 
     # Manufacturer sets battery data and mints token with updated IPFS hash
     token_id = 1
-    off_chain_data_hash = "QmPoEfuyhqEY7YZAmMmEoGc5Kco59EQ8kBQHfv6Q5a4CwQ"  # Updated IPFS hash with realistic battery data
+    off_chain_data_hash = "QmYwif6LTpPAmd8XX3WmPauVQBTgHvfeB4CgtKS9VgxWRx"  # Updated IPFS hash with realistic battery data
     ev_battery_passport.setBatteryData(
         token_id,
         "Lithium-Ion",                    # Updated Battery Type (commonly used in EVs)
@@ -101,7 +101,7 @@ def test_update_off_chain_data(ev_battery_passport, government_account, manufact
     manufacturer_location = "Austin, Texas, USA"
     battery_type = "Lithium-ion"
     product_name = "Tesla Battery Pack"
-    initial_off_chain_data_hash = "QmPoEfuyhqEY7YZAmMmEoGc5Kco59EQ8kBQHfv6Q5a4CwQ"  # Initial IPFS hash
+    initial_off_chain_data_hash = "QmYwif6LTpPAmd8XX3WmPauVQBTgHvfeB4CgtKS9VgxWRx"  # Initial IPFS hash
 
     print("Minting battery token...")
     ev_battery_passport.mintBatteryBatch(
